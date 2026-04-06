@@ -30,7 +30,7 @@ library(ggplot2)
 # ------------------------------------------------------------------------------
 
 # Read the dataset
-student_data <- read.csv("StudentPerformanceFactors.csv")
+student_data <- read.csv("data/StudentPerformanceFactors.csv")
 
 # Check data structure and summary statistics
 head(student_data)
@@ -269,19 +269,26 @@ summary(school_model)
 
 # Combine School_Type and Teacher_Quality to generate an interaction plot
 interact_data <- group_by(student_data, School_Type, Teacher_Quality)
+
+# Remove any missing values from the interact_data values
+interact_data <- filter(interact_data, !is.na(Teacher_Quality))
 interact_data <- summarise(interact_data, Mean_Score = mean(Exam_Score),
                            .groups = "drop")
 
+interact_data$Teacher_Quality <- factor(interact_data$Teacher_Quality, 
+                                        levels = c("Low", "Medium", "High"))
+
 ggplot(interact_data, aes(x = Teacher_Quality, y = Mean_Score,
-                          fill = School_Type, group = School_Type)) +
+                          colour = School_Type, group = School_Type)) +
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   labs(
     title = "School Type x Teacher Quality",
     x = "Teacher Quality",
     y = "Mean Exam Score",
-    fill = "School Type"
-  )
+    colour = "School Type"
+  ) +
+  scale_colour_manual(values = c("Public" = "hotpink", "Private" = "green"))
 
 
 # ------------------------------------------------------------------------------
