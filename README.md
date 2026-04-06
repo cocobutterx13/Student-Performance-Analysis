@@ -5,12 +5,6 @@ This project explores the factors influencing student academic performance using
 
 ---
 
-## Tools Used
-- **R**
-- **tidyverse** (dplyr, tidyr, ggplot2)
-
----
-
 ## Dataset
 - **Source:** [Student Performance Factors](https://www.kaggle.com/datasets/lainguyn123/student-performance-factors) via Kaggle
 - **File:** `StudentPerformanceFactors.csv`
@@ -62,5 +56,59 @@ Student-Performance-Analysis/
 
 ## Analysis Overview
 # 1. Data Exploration & Cleaning
+  - Inspects data structure and summary statistics using `head()`, `str()`, and `summary()`
+  - Converts categorical variables to ordered and unordered factors to preserve rank formation in models and plots
+  - Porgrammatically checks the proportion of missing values and removes incomplete rows if missingness is below 5%
+  
+# 2. Data Visualisation
+  - Histogram of `Exam_Score` with a mean reference line
+  - Pearson correlation heatmap of all numeric variables
+  - Scatter plots of `Hours_Studied` and `Attendance` vs. `Exam_Score` using `facte_wrap()`
+  - Grouped box plots of `Exam_Score` by `Motivation_Level` and `School_Type`
+  - Grouped bar chart of mean `Exam_Score` by `Family_Income` and `Parental_Involvement`
+  
+# 3. Multiple Linear Regression
+  - Full model regressing `Exam_Score` on all variables
+  - R^2 and adjusted R^2 extracted to evaluate model fit
+  - Residual plot to check model assumptions
+  - Train/test split with MSE evaluation - in progress
+  
+# 4. ANOVA - in progress
+  - One-Way ANOVA
+  - Two-Way ANOVA - tests the main effects of `School_Type` and `Teacher_Quality` and their interaction on `Exam_Score`, including a table of means, effects, and an interaction plot
+  
+# 5. Bootstrapping - in progress
+
+---
+
+## Requirements
+**R version:** 4.1 or later
+**Packages:**
+```r
+install.packages("tidyverse")
+```
+
+| Package | Purpose |
+|:--------|:--------|
+| `tidyverse` | Data wrangling and ggplot2 visualisations |
+
+All statistical procedures (regression, ANOVA, bootstrapping) use base R only.
+
+---
+
+## Usage
+1. Clone the repository and set it as your working directory in R.
+2. Ensure `StudentPerformanceFactors.csv` is in the same folder as the script.
+3. Install the required packages (see above) if not already installed.
+4. Run the script:
+```r
+source("student_performance_analysis.R")
+```
+Or open `student_performance_analysis.R` in RStudio and run it section by section.
+
+---
+
+## Key Findings
+*To be updated upon completion of all sections
 
 
